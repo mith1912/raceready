@@ -1,13 +1,25 @@
-export type SportType = "road" | "trail" | "triathlon"
+export type ElectrolyteSource =
+  | "salt_tabs"
+  | "table_salt"
+  | "sports_drink"
+  | "drink_mix"
+  | "mixed"
 
-export type ExperienceLevel = "beginner" | "intermediate" | "advanced"
+export type CarbSourcePreference =
+  | "gel_heavy"
+  | "mixed"
+  | "real_food"
 
-export interface RaceInput {
-  sportType: SportType
+export type Market = "vn" | "us" | "eu"
+
+export type RaceInput = {
+  sportType: "road" | "trail" | "triathlon"
+  locale?: "en" | "vi"
+  market?: Market
 
   user: {
     weight_kg: number
-    experience_level: ExperienceLevel
+    experience_level: "beginner" | "intermediate" | "advanced"
     stomach_tolerance: "low" | "medium" | "high"
   }
 
@@ -21,10 +33,26 @@ export interface RaceInput {
     humidity: number
   }
 
-  // optional for trail later
+  nutrition?: {
+    electrolyteSource?: "salt_tabs" | "table_salt" | "sports_drink" | "drink_mix" | "mixed"
+    carbSourcePreference?: "gel_heavy" | "mixed" | "real_food"
+    useBcaa?: boolean
+  }
+
   trail?: {
-    elevation_gain_m?: number
-    technical_level?: "easy" | "moderate" | "hard"
-    aid_station?: "frequent" | "normal" | "rare"
+    elevation_gain_m: number
+    technical_level: "easy" | "moderate" | "hard"
+    aid_station: "frequent" | "normal" | "rare"
+  }
+
+  triathlon?: {
+    swim_distance_km: number
+    swim_time_hours: number
+    bike_distance_km: number
+    bike_time_hours: number
+    run_distance_km: number
+    run_time_hours: number
+    t1_minutes?: number
+    t2_minutes?: number
   }
 }

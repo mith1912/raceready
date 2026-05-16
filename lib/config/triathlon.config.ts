@@ -6,7 +6,7 @@ export const TRIATHLON_CONFIG = {
   },
 
   bike: {
-    carbMultiplier: 1.2,
+    carbMultiplier: 1.2, 
     hydrationMultiplier: 1.3
   },
 
