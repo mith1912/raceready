@@ -1,191 +1,309 @@
 export const translations = {
   en: {
-    fuelStrategy: "Fuel Strategy",
+    // =========================
+    // GENERAL
+    // =========================
+
+    raceKit: "Race kit",
+
+    energy: "Energy",
+
     hydration: "Hydration",
-    electrolytes: "Electrolytes",
 
-    balanced: "Balanced fueling strategy for your race.",
-
-    hotHeadline: "High hydration demand due to hot conditions.",
-
-    climbingHeadline: "Long climbing sections will increase energy demand.",
-
-    fuelDesc:
-      "Steady carb intake helps maintain stable energy during the race.",
-
-    hydrationDesc:
-      "Hydration needs increase significantly in hot or long races.",
-
-    sodiumDesc:
-      "Electrolytes help maintain fluid balance and reduce cramp risk.",
-
-    coachFuel: "Start fueling early before energy drops.",
-
-    coachTrail: "Trail pacing variability can affect digestion and fueling.",
-
-    coachHydration:
-      "Drink consistently throughout the race to avoid dehydration.",
-
-    coachGut: "Use smaller, more frequent fueling to reduce stomach stress.",
-
-    coachUltra:
-      "Include real food during ultra-distance races to reduce flavor fatigue.",
-
-    drinkMixServings: "drink mix servings",
-
-    bottles: "bottles",
-
-    saltTabs: "salt tabs",
-    electrolyteOptions: "Electrolyte options",
-saltTabsOption: "Salt tabs",
-tableSaltOption: "Table salt",
-sportsDrinkOption: "Sports drink",
-suggestedProductsTitle: "Suggested products",
+    electrolytes: "Salt & electrolytes",
 
     timeline: {
-  timeline_gel: "Take gel",
-  timeline_drink: "Drink carb mix",
-  timeline_bar: "Eat energy bar",
-  timeline_food: "Eat real food",
-  timeline_t1: "T1: start bike fueling",
-  timeline_t2: "T2: switch to run fueling",
-  timeline_bike_fuel: "Bike fueling",
-  timeline_run_fuel: "Run fueling",
+      timeline_gel: "Gel",
 
-  timeline_salt_tab: "Take electrolyte tablet",
-  timeline_table_salt: "Take small salt portion",
-  timeline_sports_drink: "Drink electrolyte drink",
-  timeline_bcaa: "Take BCAA",
-},
+      timeline_bar: "Energy bar",
+
+      timeline_carb_drink: "Carb drink",
+
+      timeline_real_food: "Real food",
+
+      timeline_water: "Water",
+
+      timeline_electrolyte_drink:
+        "Electrolyte drink",
+
+      timeline_salt_capsule:
+        "Salt capsule",
+
+      timeline_electrolyte_tab:
+        "Electrolyte tab",
+
+      timeline_bcaa: "BCAA",
+
+      timeline_t1: "T1 transition",
+
+      timeline_t2: "T2 transition",
+    },
 
     warnings: {
-      hot_weather: "High heat → increase hydration",
+      hot_weather:
+        "Hot weather increases fluid and sodium needs.",
 
-      trail_unpredictable: "Trail race → fueling can become unpredictable",
+      long_race:
+        "Long races increase fueling complexity.",
 
-      tri_transition: "Triathlon → plan transition fueling carefully",
+      trail_unpredictable:
+        "Trail pacing and weather can make fueling less predictable.",
 
-      ultra_real_food: "Ultra distance → include real food strategy",
-      rare_aid_station:
-        "Aid stations are sparse, carry more fluid and calories.",
-      tri_bike_primary_fueling: "Bike leg is the main fueling window.",
-      tri_run_gut_stress: "Run leg has higher gut stress, prefer gels/liquids.",
+      high_elevation:
+        "Large elevation gain increases energy demand.",
+
+      carry_more_fluids:
+        "Rare aid stations may require larger fluid capacity.",
+
+      tri_transition:
+        "Plan fueling carefully around T1 and T2 transitions.",
     },
 
-    packing: {
-      energy_gels: "Energy gels",
+    notes: {
+      refill:
+        "You do not need to carry all fluids at once. Refill at aid stations.",
 
-      drink_mix: "Carb drink mix",
+      test:
+        "Test this fueling strategy during long runs before race day.",
 
-      energy_bars: "Energy bars",
+      trail:
+        "Trail races are usually easier with mixed fuel sources instead of gels only.",
 
-      salt_tabs: "Salt tablets",
+      triathlon:
+        "The bike section is usually the best place to eat and drink more.",
 
-      emergency_bar: "Emergency energy bar",
-
-      trail_snacks: "Trail snacks / chews / bars",
-
-      real_food: "Real food (rice balls, banana, sandwich)",
-
-      bike_nutrition: "Bike nutrition pack",
-      sports_drink: "Sports drink",
-      table_salt: "Salt / table salt",
-      bcaa: "BCAA",
-      
+      gut:
+        "If your stomach is sensitive, fuel in smaller amounts more frequently.",
     },
+
+    raceKitDescriptions: {
+      energy:
+        "Carbohydrate sources to maintain stable energy.",
+
+      hydration:
+        "Estimated fluid plan for the whole race.",
+
+      electrolytes:
+        "Electrolyte and sodium support for sweat and heat.",
+    },
+
+    raceKitNotes: {
+      carbsTarget: "Target",
+
+      sodiumTarget: "Sodium target",
+
+      fluidTarget: "Fluid target",
+
+      refill:
+        "You do not need to carry all fluids at once.",
+
+      electrolyteDrinkAlsoCounts:
+        "Electrolyte drink also contributes sodium intake.",
+    },
+
+    labels: {
+      gels: "gels",
+
+      bars: "bars",
+
+      carbDrinkServings:
+        "carb drink mixes",
+
+      realFoodServings:
+        "real food portions",
+
+      water: "water",
+
+      electrolyteDrink:
+        "electrolyte drink",
+
+      totalFluids: "total fluids",
+
+      bottle500ml:
+        "500ml bottles",
+
+      saltCapsules:
+        "salt capsules",
+
+      electrolyteTabs:
+        "electrolyte tabs",
+
+      emergencyGels:
+        "emergency gels",
+
+      bcaa: "BCAA servings",
+    },
+
+    timelineFooter:
+      "The next hours follow a similar fueling rhythm.",
+
+    calculationDetails:
+      "Calculation details",
+
+    productSuggestions:
+      "Suggested products",
+
+    hourLabel: "Hour",
+
+    minute: "m",
   },
 
   vi: {
-    fuelStrategy: "Chiến lược năng lượng",
+    // =========================
+    // GENERAL
+    // =========================
+
+    raceKit: "Chuẩn bị race",
+
+    energy: "Năng lượng",
 
     hydration: "Nước uống",
 
-    electrolytes: "Điện giải",
+    electrolytes:
+      "Muối & điện giải",
 
-    balanced: "Chiến lược tiếp năng lượng cân bằng cho race của bạn.",
-
-    hotHeadline: "Điều kiện nóng yêu cầu lượng nước cao hơn.",
-
-    climbingHeadline: "Nhiều đoạn leo dốc sẽ làm tăng nhu cầu năng lượng.",
-
-    fuelDesc:
-      "Nạp carb đều giúp duy trì năng lượng ổn định trong suốt cuộc đua.",
-
-    hydrationDesc: "Các race dài hoặc nóng cần lượng nước cao hơn đáng kể.",
-
-    sodiumDesc: "Điện giải giúp cân bằng nước và giảm nguy cơ chuột rút.",
-
-    coachFuel: "Hãy bắt đầu nạp năng lượng sớm trước khi hụt sức.",
-
-    coachTrail:
-      "Trail có nhịp độ thay đổi liên tục nên ảnh hưởng tiêu hóa và hấp thụ.",
-
-    coachHydration: "Uống đều xuyên suốt race để tránh mất nước.",
-
-    coachGut: "Nên chia nhỏ lượng ăn để giảm áp lực lên dạ dày.",
-
-    coachUltra: "Ultra dài cần bổ sung real food để tránh ngán gel.",
-
-    drinkMixServings: "khẩu phần carb drink",
-
-    bottles: "bình nước",
-
-    saltTabs: "viên điện giải",
-
-    electrolyteOptions: "Lựa chọn bù điện giải",
-saltTabsOption: "Viên điện giải",
-tableSaltOption: "Muối",
-sportsDrinkOption: "Nước điện giải",
-suggestedProductsTitle: "Gợi ý sản phẩm dễ mua",
     timeline: {
-  timeline_gel: "Ăn gel",
-  timeline_drink: "Uống carb drink",
-  timeline_bar: "Ăn energy bar",
-  timeline_food: "Ăn real food",
-  timeline_t1: "T1: bắt đầu nutrition cho bike",
-  timeline_t2: "T2: chuyển sang nutrition cho run",
-  timeline_bike_fuel: "Nạp năng lượng trên bike",
-  timeline_run_fuel: "Nạp năng lượng khi chạy",
+      timeline_gel: "Gel",
 
-  timeline_salt_tab: "Uống viên điện giải",
-  timeline_table_salt: "Dùng một ít muối",
-  timeline_sports_drink: "Uống nước điện giải",
-  timeline_bcaa: "Dùng BCAA",
-},
+      timeline_bar:
+        "Thanh năng lượng",
+
+      timeline_carb_drink:
+        "Nước carb",
+
+      timeline_real_food:
+        "Đồ ăn thật",
+
+      timeline_water: "Nước",
+
+      timeline_electrolyte_drink:
+        "Nước điện giải",
+
+      timeline_salt_capsule:
+        "Viên muối",
+
+      timeline_electrolyte_tab:
+        "Viên điện giải",
+
+      timeline_bcaa: "BCAA",
+
+      timeline_t1: "Transition T1",
+
+      timeline_t2: "Transition T2",
+    },
 
     warnings: {
-      hot_weather: "Nhiệt độ cao → cần tăng lượng nước",
+      hot_weather:
+        "Trời nóng làm tăng nhu cầu nước và điện giải.",
 
-      trail_unpredictable: "Trail race → tiếp năng lượng khó đoán hơn",
+      long_race:
+        "Race dài khiến chiến lược dinh dưỡng phức tạp hơn.",
 
-      tri_transition: "Triathlon → cần lên kế hoạch transition fueling",
+      trail_unpredictable:
+        "Trail có nhịp độ và thời tiết khó đoán hơn road.",
 
-      ultra_real_food: "Ultra dài → nên có chiến lược real food",
-      rare_aid_station: "Aid station ít, nên mang thêm nước và năng lượng.",
-      tri_bike_primary_fueling: "Bike là phần chính để nạp năng lượng.",
-      tri_run_gut_stress:
-        "Run dễ gây áp lực dạ dày hơn, nên ưu tiên gel/liquid.",
+      high_elevation:
+        "Nhiều leo dốc làm tăng nhu cầu năng lượng.",
+
+      carry_more_fluids:
+        "Aid station thưa có thể cần mang nhiều nước hơn.",
+
+      tri_transition:
+        "Hãy chuẩn bị kế hoạch dinh dưỡng cho T1 và T2.",
     },
 
-    packing: {
-      energy_gels: "Gel năng lượng",
+    notes: {
+      refill:
+        "Không cần mang toàn bộ lượng nước cùng lúc. Hãy refill tại aid station.",
 
-      drink_mix: "Carb drink mix",
+      test:
+        "Hãy test chiến lược này trong long run trước race.",
 
-      energy_bars: "Thanh năng lượng",
+      trail:
+        "Trail thường phù hợp với nhiều nguồn năng lượng kết hợp thay vì chỉ dùng gel.",
 
-      salt_tabs: "Viên điện giải",
+      triathlon:
+        "Phần bike thường là thời điểm dễ ăn và uống nhất.",
 
-      emergency_bar: "Thanh năng lượng dự phòng",
-
-      trail_snacks: "Snack trail / chew / bar",
-
-      real_food: "Real food (cơm nắm / chuối / sandwich)",
-
-      bike_nutrition: "Túi nutrition cho bike",
-      sports_drink: "Nước điện giải như Pocari / Revive",
-      table_salt: "Muối ăn / gói muối nhỏ",
-      bcaa: "BCAA",
+      gut:
+        "Nếu dạ dày nhạy cảm, hãy chia nhỏ lượng nạp thường xuyên hơn.",
     },
+
+    raceKitDescriptions: {
+      energy:
+        "Nguồn carb giúp duy trì năng lượng ổn định.",
+
+      hydration:
+        "Kế hoạch nước uống ước tính cho toàn race.",
+
+      electrolytes:
+        "Muối và điện giải hỗ trợ bù mồ hôi và nhiệt.",
+    },
+
+    raceKitNotes: {
+      carbsTarget:
+        "Mục tiêu carb",
+
+      sodiumTarget:
+        "Mục tiêu sodium",
+
+      fluidTarget:
+        "Mục tiêu nước",
+
+      refill:
+        "Không cần mang toàn bộ nước cùng lúc.",
+
+      electrolyteDrinkAlsoCounts:
+        "Nước điện giải cũng đóng góp sodium.",
+    },
+
+    labels: {
+      gels: "gói gel",
+
+      bars:
+        "thanh năng lượng",
+
+      carbDrinkServings:
+        "phần nước carb",
+
+      realFoodServings:
+        "phần đồ ăn thật",
+
+      water: "nước",
+
+      electrolyteDrink:
+        "nước điện giải",
+
+      totalFluids:
+        "tổng nước",
+
+      bottle500ml:
+        "bình 500ml",
+
+      saltCapsules:
+        "viên muối",
+
+      electrolyteTabs:
+        "viên điện giải",
+
+      emergencyGels:
+        "gel dự phòng",
+
+      bcaa: "phần BCAA",
+    },
+
+    timelineFooter:
+      "Các giờ tiếp theo sẽ lặp lại nhịp tiếp năng lượng tương tự.",
+
+    calculationDetails:
+      "Chi tiết tính toán",
+
+    productSuggestions:
+      "Gợi ý sản phẩm",
+
+    hourLabel:
+      "Giờ thứ",
+
+    minute: "m",
   },
-} as const;
+} as const

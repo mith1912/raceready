@@ -1,64 +1,79 @@
 import { RaceInput } from "../types"
 
-export type TimelineItemType =
-  | "gel"
-  | "drink"
-  | "bar"
-  | "food"
-  | "aid_station"
-  | "transition"
-  | "bike_fuel"
-  | "run_fuel"
-  | "electrolyte"
-  | "sports_drink"
-  | "salt"
-  | "bcaa"
+// export type TimelineItemType =
+//   | "gel"
+//   | "drink"
+//   | "bar"
+//   | "food"
+//   | "aid_station"
+//   | "transition"
+//   | "bike_fuel"
+//   | "run_fuel"
+//   | "electrolyte"
+//   | "sports_drink"
+//   | "salt"
+//   | "bcaa"
+//   | "salt_capsule"
 
+//   export type RaceKit = {
+//   gels: number
+//   bars: number
+//   carbDrinkServings: number
 
+//   saltCapsules: number
+//   electrolyteTabs: number
+//   sportsDrinkBottles: number
 
-export type EngineResult = {
-  metrics: {
-    totalCarbs: number
-    totalHydration: number
-    totalSodium: number
-  }
+//   carryFlasks: number
+//   realFoodServings: number
+//   emergencyGels: number
+//   bcaaServings: number
+// }
 
-  items: {
-    gels: number
-    drinkMixServings: number
-    bars: number
-    bottles: number
-    saltTabs: number
-    realFoodCalories: number
+// export type EngineResult = {
+//   metrics: {
+//     totalCarbs: number
+//     totalHydration: number
+//     totalSodium: number
+//   }
 
-    tableSaltGrams?: number
-    sportsDrink500mlBottles?: number
-    bcaaServings?: number
-  }
+//   raceKit: RaceKit
 
-  electrolyteOptions?: {
-    preferredSource: string
-    sodiumCoveredByFoodAndDrink: number
-    remainingSodium: number
-    options: {
-      saltTabs: number
-      tableSaltGrams: number
-      sportsDrink500mlBottles: number
-      drinkMixServings: number
-    }
-  }
+//   items: {
+//   gels: number
+//   drinkMixServings: number
+//   bars: number
+//   saltTabs: number
+//   realFoodCalories: number
 
-  timeline: {
-    minute: number
-    type: string
-    labelKey: string
-  }[]
+//   carryFlasks: number
+//   sportsDrink500mlBottles?: number
+//   bcaaServings?: number
+// }
 
-  warnings: string[]
-  packingList: string[]
+// electrolyteOptions?: {
+//     preferredSource: string
+//     sodiumCoveredByFoodAndDrink: number
+//     remainingSodium: number
+//     options: {
+//       saltTabs: number
+//       tableSaltGrams: number
+//       sportsDrink500mlBottles: number
+//       drinkMixServings: number
+//     }
+//   }
 
-  sportMeta?: {
-    sportType: string
-    phases?: string[]
-  }
-}
+//   timeline: {
+//     minute: number
+//     type: TimelineItemType
+//     labelKey: string
+//     noteKey?: string
+//   }[]
+
+//   warnings: string[]
+//   packingList: string[]
+//   sportMeta?: {
+//     sportType: string
+//     phases?: string[]
+//   }
+// }

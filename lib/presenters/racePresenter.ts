@@ -1,192 +1,224 @@
-import { EngineResult } from "../engine/type";
-import { translations } from "../i18n/i18n";
-import { RaceInput } from "../types";
-import { buildSuggestedProducts } from "./productPresenter";
+
+import { translations } from "../i18n/i18n"
+import { EngineResult, Locale, RaceInput } from "../types"
+import { buildSuggestedProducts } from "./productPresenter"
 
 export function buildRaceUiResponse(
   engine: EngineResult,
-  input: RaceInput,
-  locale: "en" | "vi" = "en",
+  input: RaceInput
 ) {
-  const t = translations[locale];
+  const locale: Locale = input.locale ?? "en"
+  const t = translations[locale]
+  const vi = locale === "vi"
 
-  const totalHours = input.race.expected_time_hours;
+  const expectedTimeHours = getExpectedTimeHours(input)
 
-  // =========================
-  // FORMATTERS
-  // =========================
+  const headline = buildHeadline({
+    input,
+    locale,
+  })
 
-  const hydrationLiters = (engine.metrics.totalHydration / 1000).toFixed(1);
+  const timeline = engine.timeline.map((item) => ({
+    minute: item.minute,
+    type: item.type,
+    phase: item.phase,
+    label:
+      t.timeline[
+        item.labelKey as keyof typeof t.timeline
+      ] ?? item.labelKey,
+  }))
 
-  const gelInterval =
-    engine.items.gels > 0
-      ? Math.round((totalHours * 60) / engine.items.gels)
-      : 0;
+  const warnings = engine.warnings.map((warning) => ({
+    level: "medium" as const,
+    message:
+      t.warnings[
+        warning as keyof typeof t.warnings
+      ] ?? warning,
+  }))
 
-  // =========================
-  // HEADLINE
-  // =========================
+  const notes = buildNotes({
+    input,
+    locale,
+  })
 
-  let headline: string = t.balanced;
+  return {
+    meta: {
+      locale,
+      market:
+        input.market ??
+        (locale === "vi" ? "vn" : "us"),
+
+      sportType: input.sportType,
+
+      raceLabel: buildRaceLabel({
+        input,
+        locale,
+      }),
+
+      expectedTimeHours,
+
+      distanceKm: input.race.distance_km,
+    },
+
+    headline,
+
+    targets: engine.targets,
+
+    raceKit: engine.raceKit,
+
+    timeline,
+
+    warnings,
+
+    notes,
+
+    suggestedProducts:
+      buildSuggestedProducts(engine, input),
+  }
+}
+
+function getExpectedTimeHours(input: RaceInput) {
+  if (input.sportType !== "triathlon") {
+    return input.race.expected_time_hours
+  }
+
+  const tri = input.triathlon
+
+  if (!tri) {
+    return input.race.expected_time_hours
+  }
+
+  return (
+    tri.swim_time_hours +
+    tri.bike_time_hours +
+    tri.run_time_hours +
+    ((tri.t1_minutes ?? 0) +
+      (tri.t2_minutes ?? 0)) /
+      60
+  )
+}
+
+function buildRaceLabel(params: {
+  input: RaceInput
+  locale: Locale
+}) {
+  const { input, locale } = params
+  const vi = locale === "vi"
+
+  if (input.sportType === "road") {
+    return vi
+      ? `${input.race.distance_km}K Road`
+      : `${input.race.distance_km}K Road`
+  }
+
+  if (input.sportType === "trail") {
+    return vi
+      ? `${input.race.distance_km}K Trail`
+      : `${input.race.distance_km}K Trail`
+  }
+
+  if (input.sportType === "triathlon") {
+    const tri = input.triathlon
+
+    if (!tri) {
+      return "Triathlon"
+    }
+
+    return vi
+      ? `Triathlon ${tri.swim_distance_km}K swim · ${tri.bike_distance_km}K bike · ${tri.run_distance_km}K run`
+      : `Triathlon ${tri.swim_distance_km}K swim · ${tri.bike_distance_km}K bike · ${tri.run_distance_km}K run`
+  }
+
+  return input.sportType
+}
+
+function buildHeadline(params: {
+  input: RaceInput
+  locale: Locale
+}) {
+  const { input, locale } = params
+  const vi = locale === "vi"
+
+  if (
+    input.sportType === "trail" &&
+    (input.trail?.elevation_gain_m ?? 0) > 3000 &&
+    input.env.temperature_c > 28
+  ) {
+    return vi
+      ? "Trời nóng và nhiều leo dốc làm tăng nhu cầu nước, carb và điện giải."
+      : "Hot weather and long climbs increase fluid, carb and electrolyte demand."
+  }
 
   if (input.env.temperature_c > 28) {
-    headline = t.hotHeadline;
+    return vi
+      ? "Thời tiết nóng làm tăng nhu cầu nước và điện giải."
+      : "Hot weather increases fluid and electrolyte demand."
   }
 
   if (
     input.sportType === "trail" &&
     (input.trail?.elevation_gain_m ?? 0) > 1500
   ) {
-    headline = t.climbingHeadline;
+    return vi
+      ? "Nhiều đoạn leo dốc làm tăng nhu cầu năng lượng."
+      : "Long climbs increase your fueling demand."
   }
 
-  // =========================
-  // TIMELINE LABELS
-  // =========================
+  if (input.sportType === "triathlon") {
+    return vi
+      ? "Triathlon nên ưu tiên nạp năng lượng ở phần bike và giữ đơn giản khi chạy."
+      : "For triathlon, prioritize fueling on the bike and keep the run simple."
+  }
 
-  const timeline = engine.timeline.map((item) => ({
-    minute: item.minute,
+  return vi
+    ? "Kế hoạch dinh dưỡng đơn giản cho race của bạn."
+    : "A simple fueling plan for your race."
+}
 
-    type: item.type,
+function buildNotes(params: {
+  input: RaceInput
+  locale: Locale
+}) {
+  const { input, locale } = params
+  const vi = locale === "vi"
 
-    label:
-      t.timeline[item.labelKey as keyof typeof t.timeline] ?? item.labelKey,
-  }));
+  const notes: string[] = []
 
-  // =========================
-  // WARNINGS
-  // =========================
+  notes.push(
+    vi
+      ? "Không cần mang toàn bộ lượng nước cùng lúc. Hãy refill tại aid station hoặc điểm tiếp nước."
+      : "You do not need to carry all fluids at once. Refill at aid stations or water stops."
+  )
 
-  const warnings = engine.warnings.map((warning) => ({
-    level: "medium",
-    message: t.warnings[warning as keyof typeof t.warnings],
-  }));
-
-  // =========================
-  // PACKING LIST
-  // =========================
-
-  const packingList = engine.packingList.map((item) => ({
-    label: t.packing[item as keyof typeof t.packing],
-  }));
-
-  // =========================
-  // COACH NOTES
-  // =========================
-
-  const coachNotes: string[] = [t.coachFuel];
+  notes.push(
+    vi
+      ? "Các con số là ước tính ban đầu. Hãy test trong long run trước race."
+      : "These numbers are starting estimates. Test them during long runs before race day."
+  )
 
   if (input.sportType === "trail") {
-    coachNotes.push(t.coachTrail);
+    notes.push(
+      vi
+        ? "Trail có nhịp độ thay đổi nhiều, nên dùng kết hợp gel, bar, nước carb và đồ ăn thật."
+        : "Trail pace varies a lot, so combining gels, bars, carb drink and real food is usually easier."
+    )
   }
 
-  if (input.env.temperature_c > 28) {
-    coachNotes.push(t.coachHydration);
+  if (input.sportType === "triathlon") {
+    notes.push(
+      vi
+        ? "Phần bike là thời điểm dễ nạp năng lượng nhất. Phần run nên ưu tiên gel/liquid dễ tiêu."
+        : "The bike is usually the easiest time to fuel. On the run, prefer easy-to-digest gels and liquids."
+    )
   }
 
   if (input.user.stomach_tolerance === "low") {
-    coachNotes.push(t.coachGut);
+    notes.push(
+      vi
+        ? "Nếu dạ dày nhạy cảm, hãy chia nhỏ lượng nạp và tránh thử sản phẩm mới trong ngày race."
+        : "If your stomach is sensitive, take smaller amounts more often and avoid trying new products on race day."
+    )
   }
 
-  if (totalHours >= 10) {
-    coachNotes.push(t.coachUltra);
-  }
-
-  const suggestedProducts = buildSuggestedProducts(engine, input);
-
-  // =========================
-  // RESPONSE
-  // =========================
-
-  return {
-    meta: {
-      locale,
-
-      sportType: input.sportType,
-
-      expectedTimeHours: totalHours,
-
-      distanceKm: input.race.distance_km,
-    },
-
-    summary: {
-      headline,
-
-      carbs_g: Math.round(engine.metrics.totalCarbs),
-
-      hydration_ml: Math.round(engine.metrics.totalHydration),
-
-      sodium_mg: Math.round(engine.metrics.totalSodium),
-    },
-
-    cards: {
-      fuel: {
-        title: t.fuelStrategy,
-
-        primary: `${engine.items.gels} gels + ` + `${engine.items.bars} bars`,
-
-        secondary: `${engine.items.drinkMixServings} ${t.drinkMixServings}`,
-
-        description: t.fuelDesc,
-      },
-
-      hydration: {
-        title: t.hydration,
-
-        primary: `${hydrationLiters}L`,
-
-        secondary: `${engine.items.bottles} ` + `${t.bottles}`,
-
-        description: t.hydrationDesc,
-      },
-
-      electrolytes: {
-        title: t.electrolytes,
-
-        primary: `${engine.items.saltTabs} ` + `${t.saltTabs}`,
-
-        secondary: `${Math.round(engine.metrics.totalSodium)}mg sodium`,
-
-        description: t.sodiumDesc,
-      },
-    },
-    electrolyteOptions: engine.electrolyteOptions
-      ? {
-          title: t.electrolyteOptions,
-
-          preferredSource: engine.electrolyteOptions.preferredSource,
-
-          remainingSodium: engine.electrolyteOptions.remainingSodium,
-
-          options: [
-            {
-              type: "salt_tabs",
-              label: t.saltTabsOption,
-              value: `${engine.electrolyteOptions.options.saltTabs} ${t.saltTabs}`,
-            },
-            {
-              type: "table_salt",
-              label: t.tableSaltOption,
-              value: `${engine.electrolyteOptions.options.tableSaltGrams}g`,
-            },
-            {
-              type: "sports_drink",
-              label: t.sportsDrinkOption,
-              value: `${engine.electrolyteOptions.options.sportsDrink500mlBottles} x 500ml`,
-            },
-          ],
-        }
-      : null,
-    suggestedProducts: {
-      title: t.suggestedProductsTitle,
-      ...buildSuggestedProducts(engine, input),
-    },
-    timeline,
-
-    warnings,
-
-    packingList,
-
-    coachNotes,
-  };
+  return notes
 }

@@ -1,9 +1,5 @@
-import { RaceInput } from "../types"
-import { EngineResult } from "../engine/type"
-import { NUTRITION_CONFIG } from "../config/nutrition.config"
-import { buildElectrolyteOptions } from "../engine/shared/electrolyte"
-
-type Market = "vn" | "us" | "eu"
+import { PRODUCT_CONFIG } from "../config/product.config"
+import { EngineResult, RaceInput, Market } from "../types"
 
 function getMarket(input: RaceInput): Market {
   return input.market ?? (input.locale === "vi" ? "vn" : "us")
@@ -14,46 +10,48 @@ export function buildSuggestedProducts(
   input: RaceInput
 ) {
   const market = getMarket(input)
-  const products =
-    NUTRITION_CONFIG.suggestedProducts[market]
+  const products = PRODUCT_CONFIG[market]
 
   return {
     market,
 
     gels:
-      engine.items.gels > 0
+      engine.raceKit.energy.gels > 0
         ? products.gels.slice(0, 3)
         : [],
 
     drinkMix:
-      engine.items.drinkMixServings > 0
+      engine.raceKit.energy.carbDrinkServings > 0
         ? products.drinkMix.slice(0, 3)
         : [],
 
-    sportsDrink:
-      engine.items.sportsDrink500mlBottles &&
-      engine.items.sportsDrink500mlBottles > 0
-        ? products.sportsDrink.slice(0, 3)
+    electrolyteDrink:
+      engine.raceKit.hydration.electrolyteDrinkLiters > 0
+        ? products.electrolyteDrink.slice(0, 3)
         : [],
 
-    electrolytes:
-      engine.items.saltTabs > 0
-        ? products.electrolytes.slice(0, 3)
+    saltCapsules:
+      engine.raceKit.electrolytes.saltCapsules > 0
+        ? products.saltCapsules.slice(0, 3)
+        : [],
+
+    electrolyteTabs:
+      engine.raceKit.electrolytes.electrolyteTabs > 0
+        ? products.electrolyteTabs.slice(0, 2)
         : [],
 
     bars:
-      engine.items.bars > 0
+      engine.raceKit.energy.bars > 0
         ? products.bars.slice(0, 3)
         : [],
 
     realFood:
-      engine.items.realFoodCalories > 0
+      engine.raceKit.energy.realFoodServings > 0
         ? products.realFood
         : [],
 
     bcaa:
-      engine.items.bcaaServings &&
-      engine.items.bcaaServings > 0
+      engine.raceKit.extras.bcaaServings > 0
         ? products.bcaa
         : [],
   }

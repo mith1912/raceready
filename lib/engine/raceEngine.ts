@@ -1,5 +1,4 @@
-import { RaceInput } from "../types"
-import { EngineResult } from "./type"
+import { EngineResult, RaceInput } from "../types"
 import { generateRoadPlan } from "./sports/road/roadEngine"
 import { generateTrailPlan } from "./sports/trail/trailEngine"
 import { generateTriathlonPlan } from "./sports/triathlon/triathlonEngine"
