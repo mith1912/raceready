@@ -57,6 +57,14 @@ export default function NutritionInputs({ form, setForm }: Props) {
                 ? "Chuối, cơm nắm, sandwich."
                 : "Banana, rice ball, sandwich.",
             },
+            {
+              value: "carb_drink",
+              icon: "🧃",
+              label: vi ? "Bột năng lượng" : "Carb drink",
+              description: vi
+                ? "Vừa nước, vừa năng lượng."
+                : "Fluid plus energy.",
+            },
           ]}
         />
       </FieldCard>
@@ -86,15 +94,8 @@ export default function NutritionInputs({ form, setForm }: Props) {
               description: vi
                 ? "Pocari, Revive, 100PLUS..."
                 : "Pocari, Gatorade, Powerade...",
-            },
-            {
-              value: "carb_drink",
-              icon: "🧃",
-              label: vi ? "Nước carb" : "Carb drink",
-              description: vi
-                ? "Vừa nước, vừa năng lượng."
-                : "Fluid plus energy.",
-            },
+            }
+            
           ]}
         />
       </FieldCard>

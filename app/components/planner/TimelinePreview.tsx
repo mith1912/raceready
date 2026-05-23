@@ -37,7 +37,7 @@ const ICONS: Record<TimelineItemType, TimelineIcon> = {
   },
   carb_drink: {
     icon: "🧃",
-    labelVi: "Nước carb",
+    labelVi: "Bột năng lượng",
     labelEn: "Carb drink",
   },
   real_food: {

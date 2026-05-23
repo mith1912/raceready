@@ -169,7 +169,7 @@ export const translations = {
         "Thanh năng lượng",
 
       timeline_carb_drink:
-        "Nước carb",
+        "Bột năng lượng",
 
       timeline_real_food:
         "Đồ ăn thật",
@@ -264,7 +264,7 @@ export const translations = {
         "thanh năng lượng",
 
       carbDrinkServings:
-        "phần nước carb",
+        "phần Bột năng lượng",
 
       realFoodServings:
         "phần đồ ăn thật",

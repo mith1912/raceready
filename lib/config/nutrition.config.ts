@@ -56,8 +56,8 @@ export const NUTRITION_CONFIG = {
 
     hydration: {
       water: 0.65,
-      electrolyte_drink: 0.25,
-      carb_drink: 0.1,
+      electrolyte_drink: 0.35,
+      carb_drink: 0,
     },
 
     electrolytes: {

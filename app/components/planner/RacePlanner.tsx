@@ -39,8 +39,8 @@ const initialForm: PlannerForm = {
   bike_hydration_access: "normal",
   run_aid_station: "frequent",
 
-  energySources: ["gel", "bar", "real_food"],
-  hydrationSources: ["water", "electrolyte_drink", "carb_drink"],
+  energySources: ["gel", "bar", "real_food","carb_drink"],
+  hydrationSources: ["water", "electrolyte_drink"],
   electrolyteSources: ["salt_capsule", "electrolyte_tab"],
   useBcaa: true,
 }

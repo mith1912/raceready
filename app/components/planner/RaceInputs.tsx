@@ -121,7 +121,7 @@ function RunnerProfileSection({
           label={vi ? "Dạ dày" : "Gut tolerance"}
           tooltip={
             vi
-              ? "Khả năng chịu gel, nước carb và đồ ngọt khi vận động lâu."
+              ? "Khả năng chịu gel, Bột năng lượng và đồ ngọt khi vận động lâu."
               : "How well you handle gels, carb drink and sweet foods during long efforts."
           }
         />

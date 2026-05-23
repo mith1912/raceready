@@ -199,7 +199,7 @@ function buildNotes(params: {
   if (input.sportType === "trail") {
     notes.push(
       vi
-        ? "Trail có nhịp độ thay đổi nhiều, nên dùng kết hợp gel, bar, nước carb và đồ ăn thật."
+        ? "Trail có nhịp độ thay đổi nhiều, nên dùng kết hợp gel, bar, Bột năng lượng và đồ ăn thật."
         : "Trail pace varies a lot, so combining gels, bars, carb drink and real food is usually easier."
     )
   }

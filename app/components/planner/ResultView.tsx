@@ -106,6 +106,12 @@ function RaceKitFrame({ result }: { result: RacePlanResult }) {
               unit: vi ? "thanh" : "bars",
             },
             {
+              icon: "🧃",
+              label: vi ? "Bột năng lượng" : "Carb drink",
+              value: `${kit.energy.carbDrinkServings}`,
+              unit: vi ? "phần" : "portions",
+            },
+            {
               icon: "🍙",
               label: vi ? "Đồ ăn thật" : "Real food",
               value: `${kit.energy.realFoodServings}`,
@@ -144,13 +150,7 @@ function RaceKitFrame({ result }: { result: RacePlanResult }) {
               label: vi ? "Nước điện giải" : "Electrolyte drink",
               value: `${kit.hydration.electrolyteDrinkLiters}`,
               unit: "L",
-            },
-            {
-              icon: "🧃",
-              label: vi ? "Nước carb" : "Carb drink",
-              value: `${kit.hydration.carbDrinkLiters}`,
-              unit: "L",
-            },
+            },            
             {
               icon: "🍼",
               label: vi ? "Bình cần mang" : "Bottles to carry",
@@ -353,7 +353,7 @@ function CalculationDetails({ result }: { result: RacePlanResult }) {
 
         <p className="mt-1 text-xs leading-5 text-zinc-500">
           {vi
-            ? "Phần này giúp tránh tính dư viên muối/điện giải, vì gel, nước carb và nước điện giải thường đã có sodium."
+            ? "Phần này giúp tránh tính dư viên muối/điện giải, vì gel, Bột năng lượng và nước điện giải thường đã có sodium."
             : "This avoids over-counting salt capsules because gels, carb drink and electrolyte drink may already contain sodium."}
         </p>
 
@@ -369,7 +369,7 @@ function CalculationDetails({ result }: { result: RacePlanResult }) {
           />
 
           <DetailMetric
-            label={vi ? "Tổng từ nước carb" : "Total from carb drink"}
+            label={vi ? "Tổng từ Bột năng lượng" : "Total from carb drink"}
             value={`${formatNumber(sodium.fromCarbDrinkMg)}mg`}
           />
 

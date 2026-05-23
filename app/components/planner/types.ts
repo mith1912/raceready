@@ -30,7 +30,7 @@ export type PlannerForm = {
   run_aid_station: "frequent" | "normal" | "rare"
 
   energySources: Array<"gel" | "bar" | "carb_drink" | "real_food">
-  hydrationSources: Array<"water" | "electrolyte_drink" | "carb_drink">
+  hydrationSources: Array<"water" | "electrolyte_drink" >
   electrolyteSources: Array<"salt_capsule" | "electrolyte_tab">
   useBcaa: boolean
 }

@@ -32,7 +32,7 @@ export default function ProductSuggestions({
     },
     {
       key: "drinkMix",
-      title: vi ? "Nước carb" : "Carb drink",
+      title: vi ? "Bột năng lượng" : "Carb drink",
       items: data.drinkMix ?? [],
     },
     {
