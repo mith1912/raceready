@@ -1,6 +1,7 @@
 // import { ProductItem, SuggestedProducts } from "./resultTypes"
 
 import { ProductItem, SuggestedProducts } from "./resultTypes"
+import { NUTRITION_CONFIG } from "../../../lib/config/nutrition.config"
 
 // import {
 //   ProductItem,
@@ -24,45 +25,132 @@ export default function ProductSuggestions({
 
   const vi = locale === "vi"
 
+  const getSectionNutritionTitle = (key: string, vi: boolean) => {
+    const c = NUTRITION_CONFIG.carbs
+    const s = NUTRITION_CONFIG.sodium
+
+    const fmt = (n?: number) => (n == null ? undefined : String(n))
+
+    switch (key) {
+      case "gels": {
+        const carbs = fmt(c.gelCarbs)
+        const sodium = fmt(s.sodiumBySource.gelMg)
+        return carbs || sodium
+          ? vi
+            ? ` (khoảng ${carbs ?? "-"} g carb, ${sodium ?? "-"} mg muối / gói)`
+            : ` (~${carbs ?? "-"} g carb, ${sodium ?? "-"} mg sodium / serving)`
+          : ""
+      }
+
+      case "drinkMix": {
+        const carbs = fmt(c.carbDrinkServingCarbs)
+        const sodium = fmt(s.sodiumBySource.carbDrinkServingMg)
+        return carbs || sodium
+          ? vi
+            ? ` (khoảng ${carbs ?? "-"} g carb, ${sodium ?? "-"} mg muối / serving)`
+            : ` (~${carbs ?? "-"} g carb, ${sodium ?? "-"} mg sodium / serving)`
+          : ""
+      }
+
+      case "electrolyteDrink": {
+        const sodium = fmt(s.electrolyteDrinkMgPer500ml)
+        return sodium
+          ? vi
+            ? ` (khoảng ${sodium} mg muối / 500ml)`
+            : ` (~${sodium} mg sodium / 500ml)`
+          : ""
+      }
+
+      case "saltCapsules": {
+        const sodium = fmt(s.saltCapsuleMg)
+        return sodium
+          ? vi
+            ? ` (khoảng ${sodium} mg muối / viên)`
+            : ` (~${sodium} mg sodium / capsule)`
+          : ""
+      }
+
+      case "electrolyteTabs": {
+        const sodium = fmt(s.electrolyteTabMg)
+        return sodium
+          ? vi
+            ? ` (khoảng ${sodium} mg muối / viên)`
+            : ` (~${sodium} mg sodium / tablet)`
+          : ""
+      }
+
+      case "bars": {
+        const carbs = fmt(c.barCarbs)
+        const sodium = fmt(s.sodiumBySource.barMg)
+        return carbs || sodium
+          ? vi
+            ? ` (khoảng ${carbs ?? "-"} g carb, ${sodium ?? "-"} mg muối / thanh)`
+            : ` (~${carbs ?? "-"} g carb, ${sodium ?? "-"} mg sodium / bar)`
+          : ""
+      }
+
+      case "realFood": {
+        const carbs = fmt(c.realFoodServingCarbs)
+        return carbs
+          ? vi
+            ? ` (khoảng ${carbs} g carb / khẩu phần)`
+            : ` (~${carbs} g carb / serving)`
+          : ""
+      }
+
+      case "bcaa": {
+        const sodium = fmt(s.sodiumBySource.bcaaServingMg)
+        return sodium
+          ? vi
+            ? ` (khoảng ${sodium} mg muối / serving)`
+            : ` (~${sodium} mg sodium / serving)`
+          : ""
+      }
+
+      default:
+        return ""
+    }
+  }
+
   const sections: ProductSection[] = [
     {
       key: "gels",
-      title: vi ? "Gel năng lượng" : "Gels",
+      title: (vi ? "Gel năng lượng" : "Gels") + getSectionNutritionTitle("gels", vi),
       items: data.gels ?? [],
     },
     {
       key: "drinkMix",
-      title: vi ? "Bột năng lượng" : "Carb drink",
+      title: (vi ? "Bột năng lượng" : "Carb drink") + getSectionNutritionTitle("drinkMix", vi),
       items: data.drinkMix ?? [],
     },
     {
       key: "electrolyteDrink",
-      title: vi ? "Nước điện giải" : "Electrolyte drink",
+      title: (vi ? "Nước điện giải" : "Electrolyte drink") + getSectionNutritionTitle("electrolyteDrink", vi),
       items: data.electrolyteDrink ?? [],
     },
     {
       key: "saltCapsules",
-      title: vi ? "Viên muối" : "Salt capsules",
+      title: (vi ? "Viên muối" : "Salt capsules") + getSectionNutritionTitle("saltCapsules", vi),
       items: data.saltCapsules ?? [],
     },
     {
       key: "electrolyteTabs",
-      title: vi ? "Viên điện giải" : "Electrolyte tabs",
+      title: (vi ? "Viên điện giải" : "Electrolyte tabs") + getSectionNutritionTitle("electrolyteTabs", vi),
       items: data.electrolyteTabs ?? [],
     },
     {
       key: "bars",
-      title: vi ? "Thanh năng lượng" : "Bars",
+      title: (vi ? "Thanh năng lượng" : "Bars") + getSectionNutritionTitle("bars", vi),
       items: data.bars ?? [],
     },
     {
       key: "realFood",
-      title: vi ? "Đồ ăn thật" : "Real food",
+      title: (vi ? "Đồ ăn thật" : "Real food") + getSectionNutritionTitle("realFood", vi),
       items: data.realFood ?? [],
     },
     {
       key: "bcaa",
-      title: "BCAA",
+      title: "BCAA" + getSectionNutritionTitle("bcaa", vi),
       items: data.bcaa ?? [],
     },
   ].filter((section) => section.items.length > 0)

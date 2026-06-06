@@ -8,7 +8,6 @@ type Props = {
 
 export default function ResultView({ result }: Props) {
   const locale = result.meta.locale;
-  const vi = locale === "vi";
 
   return (
     <div className="space-y-4">

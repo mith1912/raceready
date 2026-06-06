@@ -1,7 +1,7 @@
 import FieldCard from "./FieldCard"
 import InputWithSuffix from "./InputWithSuffix"
-import SmartOptionGroup from "./SmartOptionGroup"
 import TooltipLabel from "./TooltipLabel"
+import SelectField from "./SelectField"
 import { PlannerForm } from "./types"
 
 type Props = {
@@ -76,81 +76,57 @@ function RunnerProfileSection({
         />
       </div>
 
-      <div className="mt-4">
-        <TooltipLabel
-          label={vi ? "Kinh nghiệm" : "Experience"}
-          tooltip={
-            vi
-              ? "Mức kinh nghiệm ảnh hưởng tới khả năng nạp carb mỗi giờ."
-              : "Experience affects how much carb you can usually handle per hour."
-          }
-        />
+      <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+  <SelectField
+    label={vi ? "Kinh nghiệm" : "Experience"}
+    tooltip={
+      vi
+        ? "Mức kinh nghiệm ảnh hưởng tới khả năng nạp carb mỗi giờ."
+        : "Experience affects how much carb you can usually handle per hour."
+    }
+    value={form.experience_level}
+    onChange={(v) => update("experience_level", v)}
+    options={[
+      {
+        value: "beginner",
+        label: vi ? "Mới" : "Beginner",
+      },
+      {
+        value: "intermediate",
+        label: vi ? "Trung bình" : "Intermediate",
+      },
+      {
+        value: "advanced",
+        label: vi ? "Kinh nghiệm" : "Advanced",
+      },
+    ]}
+  />
 
-        <SmartOptionGroup
-          value={form.experience_level}
-          onChange={(v) => update("experience_level", v)}
-          options={[
-            {
-              value: "beginner",
-              icon: "🟢",
-              label: vi ? "Mới" : "Beginner",
-              description: vi ? "Ít race dài." : "New to long races.",
-            },
-            {
-              value: "intermediate",
-              icon: "🟡",
-              label: vi ? "Trung bình" : "Intermediate",
-              description: vi
-                ? "Đã có kinh nghiệm race."
-                : "Some race experience.",
-            },
-            {
-              value: "advanced",
-              icon: "🔴",
-              label: vi ? "Kinh nghiệm" : "Advanced",
-              description: vi
-                ? "Đã tập nạp carb tốt."
-                : "Well-trained fueling.",
-            },
-          ]}
-        />
-      </div>
-
-      <div className="mt-4">
-        <TooltipLabel
-          label={vi ? "Dạ dày" : "Gut tolerance"}
-          tooltip={
-            vi
-              ? "Khả năng chịu gel, Bột năng lượng và đồ ngọt khi vận động lâu."
-              : "How well you handle gels, carb drink and sweet foods during long efforts."
-          }
-        />
-
-        <SmartOptionGroup
-          value={form.stomach_tolerance}
-          onChange={(v) => update("stomach_tolerance", v)}
-          options={[
-            {
-              value: "low",
-              icon: "😵‍💫",
-              label: vi ? "Nhạy cảm" : "Sensitive",
-              description: vi ? "Dễ đầy bụng." : "GI issues.",
-            },
-            {
-              value: "medium",
-              icon: "🙂",
-              label: vi ? "Ổn" : "Normal",
-              description: vi ? "Ăn uống ổn." : "Usually fine.",
-            },
-            {
-              value: "high",
-              icon: "💪",
-              label: vi ? "Tốt" : "Strong",
-              description: vi ? "Chịu carb tốt." : "Handles carbs well.",
-            },
-          ]}
-        />
-      </div>
+  <SelectField
+    label={vi ? "Dạ dày" : "Gut tolerance"}
+    tooltip={
+      vi
+        ? "Khả năng chịu gel, fuel drink và đồ ngọt khi vận động lâu."
+        : "How well you handle gels, fuel drink and sweet foods during long efforts."
+    }
+    value={form.stomach_tolerance}
+    onChange={(v) => update("stomach_tolerance", v)}
+    options={[
+      {
+        value: "low",
+        label: vi ? "Nhạy cảm" : "Sensitive",
+      },
+      {
+        value: "medium",
+        label: vi ? "Ổn" : "Normal",
+      },
+      {
+        value: "high",
+        label: vi ? "Tốt" : "Strong",
+      },
+    ]}
+  />
+</div>
     </FieldCard>
   )
 }
